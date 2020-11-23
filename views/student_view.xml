@@ -1,6 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <data>
+    <!--search view for the students-->
+    <record id="student_search_view" model="ir.ui.view">
+        <field name="name">student.student.view.search</field>
+        <field name="model">student.student</field>
+        <field name="arch" type="xml">
+            <search string="Search Student">
+                <field name="name" />
+                <field name="age" />
+                <field name="nationality" />
+                <filter string="Male" name="male" domain="[('gender','=','male')]"
+                help="Students with gender as Male"/>
+                <filter string="Female" name="female" domain="[('gender','=','female')]"
+                   help="Students with gender as Female"/>
+                <filter string="Others" name="others" domain="[('gender','=','others')]"
+                   help="Students with gender as Others"/>
+                <group string="Group By" expand="1">
+                <filter string="Nationality" name="nationality" context="{'group_by':'nationality'}"/>
+                <filter string="Blood Group" name="blood_group" context="{'group_by':'student_blood_group'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
     <!--Student Form View-->
     <record id="student_free_view_form" model="ir.ui.view">
         <field name="name">student.student.view.form</field>
@@ -26,6 +48,10 @@
                         </group>
                     </group>
                 </sheet>
+               <!--div class="oe_chatter">
+                <field name="message_follower_ids" widget="mail_followers"/>
+                <field name="message_ids" widget="mail_thread"/>
+               </div-->
             </form>
         </field>
     </record>
@@ -45,6 +71,7 @@
         </field>
     </record>
 
+<!--menu action for the students menu-->
     <record id="student_menu_action" model="ir.actions.act_window">
         <field name="name">Students</field>
         <field name="res_model">student.student</field>
