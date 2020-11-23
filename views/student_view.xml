@@ -29,6 +29,13 @@
         <field name="model">student.student</field>
         <field name="arch" type="xml">
             <form string="Student">
+                <header>
+                    <button name="button_done" string="Done" class="oe_highlight" type="object"/>
+                    <button name="button_reset" string="Reset to Draft" class="oe_highlight" type="object"/>
+                    <button name="button_cancel" string="Cancel" class="oe_highlight" type="object"/>
+                    <field name="state" widget="statusbar" statusbar_visible="draft,done,cancel" 
+                                statusbar_colors='{"button_done":"green", "button_cancel":"red"}'/>
+                </header>
                 <sheet>
                     <field name="photo" widget="image" class="oe_left oe_avatar" />
                     <div class="oe_title">
@@ -67,6 +74,7 @@
             <field name="gender" />
             <field name="student_blood_group" />
             <field name="nationality" />
+            <field name="state" string="Status"/>
             </tree>
         </field>
     </record>

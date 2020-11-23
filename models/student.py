@@ -1,11 +1,26 @@
 # -*- coding: utf-8 -*-
 
-from odoo import models, fields
+from odoo import models, fields, api
 
 class StudentStudent(models.Model):
 	_name = 'student.student'
 	#_inherit = 'mail.thread'
 	_description = 'Student Recors'
+
+	@api.multi
+	def button_done(self):
+		for rec in self:
+			rec.write({'state': 'done'})
+	
+	@api.multi
+	def button_reset(self):
+		for rec in self:
+			rec.state = 'draft'
+
+	@api.multi
+	def button_cancel(self):
+		for rec in self:
+			rec.write({'state': 'cancel'})
 
 	name = fields.Char(string='Name', required=True, track_visibility='always')
 	age = fields.Integer(string='Age' , track_visibility='always')
@@ -17,3 +32,8 @@ class StudentStudent(models.Model):
      	('A-', 'A-ve'), ('B-', 'B-ve'), ('O-', 'O-ve'), ('AB-', 'AB-ve')],
     	string='Blood Group')
 	nationality = fields.Many2one('res.country', string='Nationality')
+	state = fields.Selection([
+			('draft', 'Draft'),
+			('done', 'Done'),
+			('cancel', 'Cancelled'),
+			], required=True, default='draft')
