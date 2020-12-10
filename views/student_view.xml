@@ -63,7 +63,7 @@
                                         <field name="subject" />
                                         <field name="teacher_salary" />
                                         <field name="bonus" />
-                                        <field name="total_salary" sum="Total Salary"/>
+                                        <!--field name="total_salary" sum="Total Salary"/-->
                                     </tree>
                                 </field>
                             </group>
